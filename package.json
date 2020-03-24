@@ -67,7 +67,7 @@
     "asn1js": "^2.0.26",
     "pvtsutils": "^1.0.9",
     "tslib": "^1.10.0",
-    "webcrypto-core": "^1.0.17"
+    "webcrypto-core": "file:C:\\Users\\Daniel\\Desktop\\TFM-WebCrypto\\ot-webcrypto-core"
   },
   "nyc": {
     "extension": [
