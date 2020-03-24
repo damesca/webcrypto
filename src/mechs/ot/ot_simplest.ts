@@ -1,9 +1,10 @@
 import * as core from "webcrypto-core";
 import { OtCrypto } from "./crypto";
 import { Utils } from "./utils";
+import { OtProvider, OtParams } from 'webcrypto-core';
 
 //TODO: This interface will be moved
-interface OtSimplestDHParams extends Algorithm {
+interface OtSimplestDHParams extends OtParams {
     isSender?: boolean,
     privateKey?: string,    //TODO: Change string to CryptoKey when implemented
     publicKey?: string,     //TODO: Change string to CryptoKey when implemented
@@ -12,7 +13,7 @@ interface OtSimplestDHParams extends Algorithm {
 }
 
 // Not instantiatable class because provider is not declarated into core interface
-export class OtSimplest1out2Provider extends core.OtSimplest1out2Provider {
+export class OtSimplest1out2Provider extends core.OtProvider {
 
     public async onSetup(algorithm: OtSimplestDHParams): Promise<ArrayBuffer[][]> {
 

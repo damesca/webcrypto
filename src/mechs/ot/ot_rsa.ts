@@ -2,8 +2,9 @@ import * as core from "webcrypto-core";
 import { OtCrypto } from "./crypto";
 import { Utils } from "./utils";
 import { Crypto } from "../../crypto";
+import { OtParams } from 'webcrypto-core';
 
-interface OtRsaParams extends Algorithm {
+interface OtRsaParams extends OtParams {
     m?: number,
     n?: number,
     isSender?: boolean,
@@ -32,8 +33,8 @@ export class OtRsaProvider extends core.OtRsaProvider {
                 throw new Error('algorithm: sender params are not correct');
             }
             
-            const publicKeyList = algorithm.publicKey as CryptoKey[];
-            const privateKeyList = algorithm.privateKey as CryptoKey[];
+            const publicKeyList = algorithm.publicKey;
+            const privateKeyList = algorithm.privateKey;
 
             // Encapsulate RsaPublicKey[] into publicDataSender
             var rawPublicKeyList: ArrayBuffer[] = new Array(publicKeyList.length);
@@ -72,6 +73,19 @@ export class OtRsaProvider extends core.OtRsaProvider {
         }
 
         return fixedData;
+    }
+
+    public async onObliviousPublicKeyDerivation(algorithm: OtRsaParams, publicDataSender: ArrayBuffer[], fixedDataReceiver: ArrayBuffer[][]): Promise<ArrayBuffer[]> {
+        const a = new ArrayBuffer(8);
+        return [a];
+    }
+    public async onObliviousEncrypt(algorithm: OtRsaParams, obliviousPublicKey: ArrayBuffer[], fixedDataSender: ArrayBuffer[][], clearMessages: ArrayBuffer[]): Promise<ArrayBuffer[]> {
+        const a = new ArrayBuffer(8);
+        return [a];
+    }
+    public async onObliviousDecrypt(algorithm: OtRsaParams, publicDataSender: ArrayBuffer[], privateDataReceiver: ArrayBuffer[], encryptedMessages: ArrayBuffer[]): Promise<ArrayBuffer[]> {
+        const a = new ArrayBuffer(8);
+        return [a];
     }
 
 }

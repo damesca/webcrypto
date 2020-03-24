@@ -8,6 +8,7 @@ import {
   Pbkdf2Provider,
   RsaEsProvider, RsaOaepProvider, RsaPssProvider, RsaSsaProvider,
   Sha1Provider, Sha256Provider, Sha384Provider, Sha512Provider,
+  OtRsaProvider,
 } from "./mechs";
 
 export class SubtleCrypto extends core.SubtleCrypto {
@@ -58,5 +59,9 @@ export class SubtleCrypto extends core.SubtleCrypto {
     //#region HKDF
     this.providers.set(new HkdfProvider());
     //#endregion
+
+    //#region OT
+    this.providers.set(new OtRsaProvider());
+    ////#endregion
   }
 }
