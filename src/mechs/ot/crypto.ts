@@ -91,12 +91,12 @@ export class OtCrypto {
         console.log("\n[bigint]c(return): " + c.toString());
         if(cipherLength != 0)
             maxLen = cipherLength;
-        const cipherText = this.i2osp(c, maxLen);
+        const cipherText = this.i2osp(c, Math.ceil(c.bitLength().valueOf() / 8));
 
         return cipherText;
     }
 
-    public static rawRsaDecrypt(modulus: Buffer, privateExponent: Buffer, cipherText: Buffer, messageLength: number): Buffer {
+    public static rawRsaDecrypt(modulus: Buffer, privateExponent: Buffer, cipherText: Buffer, messageLength: number = 0): Buffer {
         const maxLen = modulus.length;
         const n = this.os2ip(modulus);
         const d = this.os2ip(privateExponent);
@@ -116,12 +116,14 @@ export class OtCrypto {
         var m = c.modPow(d, n);
         console.log("\n[bigint]m(return): " + m.toString());
         /////  TEMPORAL FIX - NOT PROPER SECURITY //////
+        /*
         const comparison = m.compare(bigInt(256).pow(messageLength));
         if(comparison == 1 || comparison == 0){
             m = bigInt.randBetween(0, bigInt(256).pow(messageLength));
         }
+        */
         /*********************************************/
-        const message = this.i2osp(m, messageLength);
+        const message = this.i2osp(m, Math.ceil(m.bitLength().valueOf() / 8));
 
         return message;
     }
